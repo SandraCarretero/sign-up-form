@@ -14,7 +14,10 @@ export const GlobalStyles = createGlobalStyle`
   
   body{
     margin: 0;
-    font-family: sans-serif;
+    color: white;
+    font-family: 'Poppins';
+    background-color: #FF7979;
+    background-image: url(/images/bg-intro-desktop.png);
   }
 
   a{
