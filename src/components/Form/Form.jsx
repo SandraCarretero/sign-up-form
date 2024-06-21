@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import {
 	StyledButton,
+	StyledContainer,
 	StyledContainerInput,
 	StyledFlex,
 	StyledForm,
 	StyledInput,
 	StyledTerms,
-	StyledText
+	StyledText,
+	StyledTextError
 } from './form.styles';
 import Box from '../Box/Box';
 
@@ -28,62 +30,85 @@ const Form = () => {
 		<StyledFlex>
 			<Box />
 			<StyledForm onSubmit={handleSubmit}>
-				<StyledContainerInput>
-					<StyledInput
-						type='text'
-						name='name'
-						id='name'
-						placeholder='First Name'
-						onInput={event =>
-							changeFormValues(event.target, formData, setFormData)
-						}
-					/>
+				<StyledContainer>
+					<StyledContainerInput>
+						<StyledInput
+							type='text'
+							name='name'
+							id='name'
+							placeholder='First Name'
+							onInput={event =>
+								changeFormValues(event.target, formData, setFormData)
+							}
+						/>
+						{!formData.errors.name && (
+							<img src='/images/icon-error.svg' alt='' />
+						)}
+					</StyledContainerInput>
 					{!formData.errors.name && (
-						<img src='public/images/icon-error.svg' alt='' />
+						<StyledTextError>First Name cannot be empty</StyledTextError>
 					)}
-				</StyledContainerInput>
-				<StyledContainerInput>
-					<StyledInput
-						type='text'
-						name='lastName'
-						id='lastName'
-						placeholder='Last Name'
-						onInput={event =>
-							changeFormValues(event.target, formData, setFormData)
-						}
-					/>
+				</StyledContainer>
+				<StyledContainer>
+					<StyledContainerInput>
+						<StyledInput
+							type='text'
+							name='lastName'
+							id='lastName'
+							placeholder='Last Name'
+							onInput={event =>
+								changeFormValues(event.target, formData, setFormData)
+							}
+						/>
+						{!formData.errors.lastName && (
+							<img src='/images/icon-error.svg' alt='' />
+						)}
+					</StyledContainerInput>
 					{!formData.errors.lastName && (
-						<img src='public/images/icon-error.svg' alt='' />
+						<StyledTextError>Last Name cannot be empty</StyledTextError>
 					)}
-				</StyledContainerInput>
-				<StyledContainerInput>
-					<StyledInput
-						type='text'
-						name='email'
-						id='email'
-						placeholder='Email Adress'
-						onInput={event =>
-							changeFormValues(event.target, formData, setFormData)
-						}
-					/>
+				</StyledContainer>
+				<StyledContainer>
+					<StyledContainerInput>
+						<StyledInput
+							type='text'
+							name='email'
+							id='email'
+							placeholder='Email Adress'
+							onInput={event =>
+								changeFormValues(event.target, formData, setFormData)
+							}
+						/>
+						{!formData.errors.email && (
+							<img src='/images/icon-error.svg' alt='' />
+						)}
+					</StyledContainerInput>
 					{!formData.errors.email && (
-						<img src='public/images/icon-error.svg' alt='' />
+						<StyledTextError>Looks like this is not an email</StyledTextError>
 					)}
-				</StyledContainerInput>
-				<StyledContainerInput>
-					<StyledInput
-						type='text'
-						name='password'
-						id='password'
-						placeholder='Password'
-						onInput={event =>
-							changeFormValues(event.target, formData, setFormData)
-						}
-					/>
+				</StyledContainer>
+				<StyledContainer>
+					<StyledContainerInput>
+						<StyledInput
+							type='text'
+							name='password'
+							id='password'
+							placeholder='Password'
+							onInput={event =>
+								changeFormValues(event.target, formData, setFormData)
+							}
+						/>
+						{!formData.errors.password && (
+							<img src='/images/icon-error.svg' alt='' />
+						)}
+					</StyledContainerInput>
 					{!formData.errors.password && (
-						<img src='public/images/icon-error.svg' alt='' />
+						<StyledTextError>
+							Minimum 8 characters, 1 uppercase letter, 1 lowercase letter and 1
+							number
+						</StyledTextError>
 					)}
-				</StyledContainerInput>
+				</StyledContainer>
 				<StyledButton type='submit' value='CLAIM YOUR FREE TRIAL' />
 
 				<StyledText>

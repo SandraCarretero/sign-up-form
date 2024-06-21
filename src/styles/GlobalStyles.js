@@ -17,7 +17,11 @@ export const GlobalStyles = createGlobalStyle`
     color: white;
     font-family: 'Poppins';
     background-color: #FF7979;
-    background-image: url(/images/bg-intro-desktop.png);
+    background-image: url(/images/bg-intro-mobile.png);
+
+    @media (min-width: 1024px){
+      background-image: url(/images/bg-intro-desktop.png);
+    }
   }
 
   a{
