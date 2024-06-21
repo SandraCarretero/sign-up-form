@@ -46,7 +46,7 @@ const Form = () => {
 						)}
 					</StyledContainerInput>
 					{!formData.errors.name && (
-						<StyledTextError>First Name cannot be empty</StyledTextError>
+						<StyledTextError>First Name invalid</StyledTextError>
 					)}
 				</StyledContainer>
 				<StyledContainer>
@@ -65,7 +65,7 @@ const Form = () => {
 						)}
 					</StyledContainerInput>
 					{!formData.errors.lastName && (
-						<StyledTextError>Last Name cannot be empty</StyledTextError>
+						<StyledTextError>Last Name invalid</StyledTextError>
 					)}
 				</StyledContainer>
 				<StyledContainer>
@@ -90,7 +90,7 @@ const Form = () => {
 				<StyledContainer>
 					<StyledContainerInput>
 						<StyledInput
-							type='text'
+							type='password'
 							name='password'
 							id='password'
 							placeholder='Password'
