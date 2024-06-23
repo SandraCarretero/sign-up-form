@@ -1,6 +1,6 @@
 import Form from '../Form/Form';
 import Text from '../Text/Text';
-import { StyledContainer } from './MainContainer.styles';
+import { StyledContainer } from './mainContainer.styles';
 
 const MainContainer = () => {
 	return (
