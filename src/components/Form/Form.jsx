@@ -23,13 +23,21 @@ const Form = () => {
 			lastName: false,
 			password: false,
 			email: false
+		},
+		dirty: {
+			name: false,
+			lastName: false,
+			password: false,
+			email: false
 		}
 	});
 
 	return (
 		<StyledFlex>
 			<Box />
-			<StyledForm onSubmit={handleSubmit}>
+			<StyledForm
+				onSubmit={event => handleSubmit(event, formData, setFormData)}
+			>
 				<StyledContainer>
 					<StyledContainerInput>
 						<StyledInput
@@ -41,11 +49,11 @@ const Form = () => {
 								changeFormValues(event.target, formData, setFormData)
 							}
 						/>
-						{!formData.errors.name && (
+						{formData.dirty.name && !formData.errors.name && (
 							<img src='/images/icon-error.svg' alt='' />
 						)}
 					</StyledContainerInput>
-					{!formData.errors.name && (
+					{formData.dirty.name && !formData.errors.name && (
 						<StyledTextError>First Name invalid</StyledTextError>
 					)}
 				</StyledContainer>
@@ -60,11 +68,11 @@ const Form = () => {
 								changeFormValues(event.target, formData, setFormData)
 							}
 						/>
-						{!formData.errors.lastName && (
+						{formData.dirty.lastName && !formData.errors.lastName && (
 							<img src='/images/icon-error.svg' alt='' />
 						)}
 					</StyledContainerInput>
-					{!formData.errors.lastName && (
+					{formData.dirty.lastName && !formData.errors.lastName && (
 						<StyledTextError>Last Name invalid</StyledTextError>
 					)}
 				</StyledContainer>
@@ -79,11 +87,11 @@ const Form = () => {
 								changeFormValues(event.target, formData, setFormData)
 							}
 						/>
-						{!formData.errors.email && (
+						{formData.dirty.email && !formData.errors.email && (
 							<img src='/images/icon-error.svg' alt='' />
 						)}
 					</StyledContainerInput>
-					{!formData.errors.email && (
+					{formData.dirty.email && !formData.errors.email && (
 						<StyledTextError>Looks like this is not an email</StyledTextError>
 					)}
 				</StyledContainer>
@@ -98,11 +106,11 @@ const Form = () => {
 								changeFormValues(event.target, formData, setFormData)
 							}
 						/>
-						{!formData.errors.password && (
+						{formData.dirty.password && !formData.errors.password && (
 							<img src='/images/icon-error.svg' alt='' />
 						)}
 					</StyledContainerInput>
-					{!formData.errors.password && (
+					{formData.dirty.password && !formData.errors.password && (
 						<StyledTextError>
 							Minimum 8 characters, 1 uppercase letter, 1 lowercase letter and 1
 							number
@@ -119,38 +127,45 @@ const Form = () => {
 		</StyledFlex>
 	);
 };
+
 const validateForm = (name, value, formData, setFormData) => {
 	const formatedValue = value.trim();
 	const regexName = /^[a-zñ]+$/i;
 	const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 	const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/i;
+	let isValid = false;
+
 	if (name === 'name') {
-		const isValidName = regexName.test(formatedValue);
+		isValid = regexName.test(formatedValue) && formatedValue !== '';
 		setFormData({
 			...formData,
 			[name]: value,
-			errors: { ...formData.errors, name: isValidName }
+			errors: { ...formData.errors, name: isValid },
+			dirty: { ...formData.dirty, name: true }
 		});
 	} else if (name === 'lastName') {
-		const isValidLastName = regexName.test(formatedValue);
+		isValid = regexName.test(formatedValue) && formatedValue !== '';
 		setFormData({
 			...formData,
 			[name]: value,
-			errors: { ...formData.errors, lastName: isValidLastName }
+			errors: { ...formData.errors, lastName: isValid },
+			dirty: { ...formData.dirty, lastName: true }
 		});
 	} else if (name === 'email') {
-		const isValidEmail = regexEmail.test(formatedValue);
+		isValid = regexEmail.test(formatedValue) && formatedValue !== '';
 		setFormData({
 			...formData,
 			[name]: value,
-			errors: { ...formData.errors, email: isValidEmail }
+			errors: { ...formData.errors, email: isValid },
+			dirty: { ...formData.dirty, email: true }
 		});
 	} else if (name === 'password') {
-		const isValidEmail = regexPassword.test(formatedValue);
+		isValid = regexPassword.test(formatedValue) && formatedValue !== '';
 		setFormData({
 			...formData,
 			[name]: value,
-			errors: { ...formData.errors, password: isValidEmail }
+			errors: { ...formData.errors, password: isValid },
+			dirty: { ...formData.dirty, password: true }
 		});
 	}
 };
@@ -160,8 +175,30 @@ const changeFormValues = (input, formData, setFormData) => {
 	validateForm(name, value, formData, setFormData);
 };
 
-const handleSubmit = event => {
+const handleSubmit = (event, formData, setFormData) => {
 	event.preventDefault();
+
+	const fields = ['name', 'lastName', 'email', 'password'];
+	let newFormData = { ...formData };
+
+	fields.forEach(field => {
+		if (!formData[field]) {
+			newFormData = {
+				...newFormData,
+				errors: { ...newFormData.errors, [field]: false },
+				dirty: { ...newFormData.dirty, [field]: true }
+			};
+		}
+	});
+
+	setFormData(newFormData);
+
+	const allValid = Object.values(newFormData.errors).every(error => error);
+	if (allValid) {
+		console.log('Formulario enviado:', newFormData);
+	} else {
+		console.log('Formulario con errores:', newFormData);
+	}
 };
 
 export default Form;

@@ -62,6 +62,7 @@ const StyledTextError = styled.span`
 	color: #ff7979;
 	font-size: 0.6875rem;
 	font-style: italic;
+	text-align: right;
 `;
 
 const StyledButton = styled.input`
