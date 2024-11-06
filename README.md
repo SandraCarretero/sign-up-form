@@ -7,11 +7,11 @@
 
 ## Descripción 📑
 
-En este proyecto, he creado una aplicación en React que muestra las banderas de diferentes países junto con sus nombres. La aplicación incluye un modo claro y oscuro y permite filtrar los países. Los datos se obtienen de una API externa, y react-router-dom facilita la navegación.
+En este proyecto, he desarrollado un formulario en React que incluye validación en cada uno de sus campos. La validación asegura que los datos ingresados sean correctos antes de su envío.
 
 ## ¿Qué he aprendido en este proyecto? 🙇🏻
 
-A través de este proyecto, he aprendido a usar react-router-dom para la navegación y a consumir datos de una API para mostrar información dinámica. También he trabajado en la implementación de modos claro y oscuro y en el desarrollo de un filtro por países para mejorar la usabilidad.
+A través de este proyecto, he aprendido a implementar validación en formularios de React, asegurando que cada campo cumpla con los requisitos establecidos. Esto me ayudó a reforzar mis habilidades en la gestión de estados y eventos en formularios.
 
 ## Tecnologías 🛠
 
